@@ -3,7 +3,7 @@ const YTDL = require("ytdl-core");
 const config = require("./config.json");
 var bot = new Discord.Client();
 
-const Version = "1.0.0";
+const Version = "1.1.0";
 
 var servers = {};
 
@@ -54,7 +54,7 @@ bot.on("ready", function(){
 });
 
 bot.on("guildMemberAdd", function(member) {
-    member.guild.channels.find("name", "general").sendMessage(member.toString() + " Has Joined The Server!");
+    member.guild.channels.find("name", "general").send(member.toString() + " Has Joined The Server!");
 });
 
 bot.on("message", function(message){
@@ -67,7 +67,7 @@ bot.on("message", function(message){
 
     switch (args[0].toLowerCase()) {
         default:
-            message.channel.sendMessage("Invalid Command\nUse " + config.prefix + "help For Help");
+            message.channel.send("Invalid Command\nUse " + config.prefix + "help For Help");
             break;
         case "help":
             var Help = new Discord.RichEmbed()
@@ -75,13 +75,13 @@ bot.on("message", function(message){
                 .setThumbnail("https://i.imgur.com/je2LHHe.png")
                 .setAuthor("Project ChatX", "https://i.imgur.com/je2LHHe.png", "https://chat.troplo.com/")
                 .setTitle("Help:")
-				.addField("Other~~", config.prefix + "chatx: Get some info on ChatX~~")
+				.addField("Other","~~" + config.prefix + "chatx: Get some info on ChatX~~\n" + config.prefix + "download: Download the ChatX open-source bot")
                 .addField("Info", config.prefix + "me: Shows Info About You\n" + config.prefix + "botinfo: Shows Info About The Bot\n" + config.prefix + "projectinfo: List Of Infomation\n" + config.prefix + "botowner: Shows Infomation About The Bot Owner")
-                .addField("Music", config.prefix + "play: Plays Some Music\n" + config.prefix + "skip: Skips The Song\n" + config.prefix + "stop: Stops The Music\n~~" + config.prefix + "volume: sets the music volume~~")
+                .addField("Music","~~" + config.prefix + "play: Plays Some Music\n" + config.prefix + "skip: Skips The Song\n" + config.prefix + "stop: Stops The Music\n" + config.prefix + "volume: sets the music volume~~")
                 .addField("Admin", config.prefix + "setname: Sets The Name Of The Bot\n" + config.prefix + "setavatar: Sets The Avatar Of The Bot\n" + config.prefix + "shutdown: shutsdown the bot")
                 .setFooter("Project Name: ChatX - Version: " + Version)
-            //message.channel.sendMessage(":mailbox_with_mail:")
-            message.channel.sendEmbed(Help)
+            //message.channel.send(":mailbox_with_mail:")
+            message.channel.send(Help)
             break;
         case "botinfo":
             var BotInfo = new Discord.RichEmbed()
@@ -95,7 +95,7 @@ bot.on("message", function(message){
                 .addField("Bot:", bot.user.username, true)
                 .addField("Bot Owner:", config.owner, true)
                 .setFooter("Project Name: ChatX - Version: " + Version)
-            message.channel.sendEmbed(BotInfo);
+            message.channel.send(BotInfo);
             break;
         case "projectinfo":
             var BotInfo = new Discord.RichEmbed()
@@ -108,7 +108,7 @@ bot.on("message", function(message){
                 .addField("Project Owner:", "DarkMatter#0712", true)
                 .addField("Project Version: ", Version, true)
                 .setFooter("Project Name: ChatX - Version: " + Version)
-            message.channel.sendEmbed(BotInfo);
+            message.channel.send(BotInfo);
             break;
         case "botowner":
             var BotInfo = new Discord.RichEmbed()
@@ -119,7 +119,7 @@ bot.on("message", function(message){
                 .addField("Name:", config.owner + config.tag)
                 .addField("Bot Name:", bot.user.username)
                 .setFooter("Project Name: ChatX - Version: " + Version)
-            message.channel.sendEmbed(BotInfo);
+            message.channel.send(BotInfo);
             break;
         case "me":
             var Me = new Discord.RichEmbed()
@@ -132,17 +132,17 @@ bot.on("message", function(message){
                 .addField("ID", message.author.id)
                 .addField("Avatar URL:", message.author.avatarURL)
                 .setFooter("Project Name: ChatX - Version: " + Version)
-            message.channel.sendEmbed(Me);
+            message.channel.send(Me);
             break;
 
         case "play":
             if (!args[1]) {
-                message.channel.sendMessage("Please Provide A Link");
+                message.channel.send("Please Provide A Link");
                 return;
             }
 
             if (!message.member.voiceChannel) {
-                message.channel.sendMessage("You Need To Be In A Voice Channel");
+                message.channel.send("You Need To Be In A Voice Channel");
                 return;
             }
 
@@ -166,7 +166,7 @@ bot.on("message", function(message){
                 .addField("Requested By:", message.author.username)
                 .addField("URL:", Link, true)
                 .setFooter("Project Name: ChatX - Version: " + Version)
-                message.channel.sendEmbed(Music)
+                message.channel.send(Music)
             });
             break;
         case "skip":
@@ -182,52 +182,60 @@ bot.on("message", function(message){
             
         case "setname":
             if(message.author.id !== config.ownerid) {
-                message.channel.sendMessage("Command Error")
-                console.log("user " + message.author.username + " tryed to use the setname command")
+                message.channel.send("Command Error")
+                console.log("user " + message.author.username + " tried to use the setname command")
             }
             else{
                 if(args[1]){
-                    let newname = args.slice(1).join(" ");;
-                    bot.user.setUsername(newname)
-                    message.channel.sendMessage("Name Set To " + newname)
+                    let newname = args.slice(1).join(" ");
+                    bot.user.setUsername(newname);
+					//message.guild.member(bot.user).setNickname(newname)
+                    message.channel.send("Name Set To " + newname)
                 }
                 else{
-                    message.channel.sendMessage("Command Error")
-                    console.log("user " + message.author.username + " tryed to use the setname command without an argument")
+                    message.channel.send("Command Error")
+                    console.log("user " + message.author.username + " tried to use the setname command without an argument")
                 }
             }
             break;
         case "setavatar":
             if(message.author.id !== config.ownerid) {
-                message.channel.sendMessage("Command Error")
-                console.log("user " + message.author.username + " tryed to use the setavatar command")
+                message.channel.send("Command Error")
+                console.log("user " + message.author.username + " tried to use the setavatar command")
             }
             else{
                 if(args[1]){
                     let newavatar = args[1];
                     bot.user.setAvatar(newavatar)
-                    message.channel.sendMessage("Avatar Set To " + newavatar)
+                    message.channel.send("Avatar Set To " + newavatar)
             }
             else{
-                message.channel.sendMessage("Command Error")
-                console.log("user " + message.author.username + " tryed to use the setavatar command without an argument")
+                message.channel.send("Command Error")
+                console.log("user " + message.author.username + " tried to use the setavatar command without an argument")
             }
         }
         break;
 		case "chatx":
 		var ChatX = new Discord.RichEmbed()
-                .setColor("#0077ff")
-                .setDescription("[ChatX](https://chat.troplo.com/) is a community of some awsome people.");
-            message.channel.send(ChatX)
+			.setColor("#0077ff")
+			.setDescription("[ChatX](https://chat.troplo.com/) is a community of some awsome people.");
+        message.channel.send(ChatX)
 			//message.channel.send("ChatX is a community of some cool people.")
+		break;
+		case "download":
+		var DownloadX = new Discord.RichEmbed()
+			.setColor("#0077ff")
+			.setDescription("Download ChatX open-source\n[Download](https://github.com/VexionProject/Project-ChatX-Public)")
+			.setFooter("Project Name: ChatX - Version: " + Version)
+		message.channel.send(DownloadX);
 		break;
         case "shutdown":
         if(message.author.id !== config.ownerid) {
-            message.channel.sendMessage("Command Error")
-            console.log("user " + message.author.username + " tryed to use the shutdown command")
+            message.channel.send("Command Error")
+            console.log("user " + message.author.username + " tried to use the shutdown command")
         }
         else{
-            message.channel.sendMessage(":wave:")
+            message.channel.send(":wave:")
             bot.destroy((err) => {
                 console.log(err);
         });
