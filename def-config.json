@@ -1,0 +1,11 @@
+{
+"token": "Your ChatX bot token",
+"prefix": "!",
+"ownerid": "Your ChatX ID",
+"owner": "Your ChatX username",
+"tag": "Your ChatX tag (with hashtag)",
+"image": "A link to your image",
+"url": "A link to your website",
+"colour": "'#0077ff'",
+"game": "Message under the name"
+}
