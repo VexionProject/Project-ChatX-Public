@@ -53,7 +53,10 @@ function setTime() {
   },1);
 }
 
+console.log("If this screen stays black for a long time it means the site is down");
+
 bot.on("ready", function(){
+	console.clear();
     console.log("Version: " + Version);
     console.log(" ");
     console.log("Bot Info: ");
