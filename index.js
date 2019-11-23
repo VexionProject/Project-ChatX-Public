@@ -10,7 +10,7 @@ require("moment-duration-format");
 let os = require('os');
 let cpuStat = require("cpu-stat");
 
-const Version = "1.2.7";
+const Version = "1.2.8";
 
 var servers = {};
 
@@ -116,7 +116,7 @@ bot.on("message", function(message){
             var Help = new Discord.RichEmbed()
                 .setColor(config.colour)
                 .setThumbnail("https://i.imgur.com/je2LHHe.png")
-                .setAuthor("Project ChatX", "https://i.imgur.com/je2LHHe.png", "https://chat.troplo.com/")
+                .setAuthor("Project ChatX", "https://i.imgur.com/je2LHHe.png", "https://chatx.xyz/")
                 .setTitle("Help:")
 				.addField("Other", config.prefix + "chatx: Get some info on ChatX\n" + config.prefix + "download: Download the ChatX open-source bot\n" + config.prefix + "ping: Pings The Bot\n" + config.prefix + "stats: Stats For The Bots Host\n" + config.prefix + "uptime: Bots Uptime")
                 .addField("Info", config.prefix + "me: Shows Info About You\n" + config.prefix + "botinfo: Shows Info About The Bot\n" + config.prefix + "projectinfo: List Of Infomation\n" + config.prefix + "botowner: Shows Infomation About The Bot Owner")
@@ -131,7 +131,7 @@ bot.on("message", function(message){
                 .setColor("#0077ff")
                 .setURL(config.url)
                 .setThumbnail(bot.user.avatarURL)
-                .setAuthor("Project ChatX", "https://i.imgur.com/je2LHHe.png", "https://chat.troplo.com/")
+                .setAuthor("Project ChatX", "https://i.imgur.com/je2LHHe.png", "https://chatx.xyz")
                 .setTitle("Bot Info:")
                 .addField("Project Creator:", "DarkMatter#0712", true)
                 .addField("Project Name:", "ChatX", true)
@@ -143,9 +143,9 @@ bot.on("message", function(message){
         case "projectinfo":
             var BotInfo = new Discord.RichEmbed()
                 .setColor("#0077ff")
-                .setURL("https://chat.troplo.com/")
+                .setURL("https://chatx.xyz")
                 .setThumbnail("https://i.imgur.com/je2LHHe.png")
-                .setAuthor("Project ChatX", "https://i.imgur.com/je2LHHe.png", "https://chat.troplo.com/")
+                .setAuthor("Project ChatX", "https://i.imgur.com/je2LHHe.png", "https://chatx.xyz")
                 .setTitle("Project Info")
                 .addField("Project Name:", "ChatX", true)
                 .addField("Project Owner:", "DarkMatter#0712", true)
@@ -274,7 +274,7 @@ bot.on("message", function(message){
 		case "chatx":
 		var ChatX = new Discord.RichEmbed()
 			.setColor("#0077ff")
-			.setDescription("[ChatX](https://chat.troplo.com/) is a community of some awsome people.");
+			.setDescription("[ChatX](https://chatx.xyz) is a community of some awsome people.");
         message.channel.send(ChatX)
 			//message.channel.send("ChatX is a community of some cool people.")
 		break;

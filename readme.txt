@@ -1,5 +1,5 @@
 ﻿Bot: ChatX
-Creater: DarkMatter#0712
+Creator: DarkMatter#0712
 Version: 1.x.x
 
 1. install node.js (https://nodejs.org/en/)
